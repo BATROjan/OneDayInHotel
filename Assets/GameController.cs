@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class GameController
 {
     private readonly HallController _hallController;
