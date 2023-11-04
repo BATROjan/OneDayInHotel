@@ -21,7 +21,7 @@ public class HallController
         var position = new Vector3(17, 0.5f, 0);
         var hall = _hallViewPool.Spawn(position);
         _hallsList.Add(hall);
-        hall.AddAnimatin(() => Despawn(hall),20);
+        hall.AddAnimatin(() => Despawn(hall));
     }
     
     public void SpawnStartHall()
@@ -29,12 +29,12 @@ public class HallController
         var position = new Vector3(-4.2f, 0.5f, 0);
         var hall = _hallViewPool.Spawn(position);
         _hallsList.Add(hall);
-        hall.AddAnimatin(() => Despawn(hall),7.52f);
+        hall.AddAnimatin(() => Despawn(hall));
 
         position = new Vector3(8f, 0.5f, 0);
         var hall1 = _hallViewPool.Spawn(position);
         _hallsList.Add(hall);
-        hall1.AddAnimatin(() => Despawn(hall1),14.7f);
+        hall1.AddAnimatin(() => Despawn(hall1));
     }
     
     public void Despawn(HallView hallView)

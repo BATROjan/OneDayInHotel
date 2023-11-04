@@ -4,6 +4,9 @@ using UnityEngine;
 public class HallConfig : ScriptableObject
 {
     
-    [SerializeField] private float speedAnimation;
+    [SerializeField] private float allDuraction;
+    [SerializeField] private float endPositionX;
+    [SerializeField] private float spawnPositionX;
+    [SerializeField] private float sumPath;
     
 }
