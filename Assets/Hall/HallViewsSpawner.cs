@@ -5,7 +5,7 @@ public class HallViewsSpawner: ITickable
 {
     private readonly TickableManager _tickableManager;
     private readonly HallController _hallController;
-    private float _spawnPeriod= 3.5f;
+    private float _spawnPeriod= 3.25f;
     private float _timer;
 
     public HallViewsSpawner(TickableManager tickableManager,
@@ -34,7 +34,7 @@ public class HallViewsSpawner: ITickable
         if (_spawnPeriod <= 0)
         {
             _hallController.Spawn();
-            _spawnPeriod = 3.5f;
+            _spawnPeriod = 7.2f;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class HallController
 {
@@ -8,7 +9,8 @@ public class HallController
     private List<HallView> _hallsList = new List<HallView>();
 
     public HallController(HallView.Pool hallViewPool,
-        HallConfig hallConfig)
+        HallConfig hallConfig
+        )
     {
         _hallViewPool = hallViewPool;
         _hallConfig = hallConfig;
@@ -16,16 +18,28 @@ public class HallController
 
     public void Spawn()
     {
-        _hallViewPool.Spawn();
+        var position = new Vector3(17, 0.5f, 0);
+        var hall = _hallViewPool.Spawn(position);
+        _hallsList.Add(hall);
+        hall.AddAnimatin(() => Despawn(hall),20);
     }
     
     public void SpawnStartHall()
     {
-        //_hallViewPool.Spawn(startPosition);
+        var position = new Vector3(-4.2f, 0.5f, 0);
+        var hall = _hallViewPool.Spawn(position);
+        _hallsList.Add(hall);
+        hall.AddAnimatin(() => Despawn(hall),7.52f);
+
+        position = new Vector3(8f, 0.5f, 0);
+        var hall1 = _hallViewPool.Spawn(position);
+        _hallsList.Add(hall);
+        hall1.AddAnimatin(() => Despawn(hall1),14.7f);
     }
     
     public void Despawn(HallView hallView)
     {
+        _hallsList.Add(hallView);
         _hallViewPool.Despawn(hallView);
     }
     
