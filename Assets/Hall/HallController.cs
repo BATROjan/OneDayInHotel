@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using Door;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class HallController
@@ -7,11 +10,15 @@ public class HallController
     private readonly HallConfig _hallConfig;
     
     private List<HallView> _hallsList = new List<HallView>();
+    private readonly DoorView.Pool _doorPool;
 
-    public HallController(HallView.Pool hallViewPool,
+    public HallController(
+        DoorView.Pool doorPool,
+        HallView.Pool hallViewPool,
         HallConfig hallConfig
-        )
+    )
     {
+        _doorPool = doorPool;
         _hallViewPool = hallViewPool;
         _hallConfig = hallConfig;
     }
@@ -20,6 +27,12 @@ public class HallController
     {
         var position = new Vector3(17, 0.5f, 0);
         var hall = _hallViewPool.Spawn(position);
+        if (hall.transform.childCount>0)
+        {
+            _doorPool.Despawn(hall.transform.GetComponentInChildren<DoorView>());
+        }
+        var door = _doorPool.Spawn();
+        door.transform.SetParent(hall.transform, worldPositionStays: false);
         _hallsList.Add(hall);
         hall.AddAnimatin(() => Despawn(hall));
     }
@@ -41,6 +54,7 @@ public class HallController
     {
         _hallsList.Add(hallView);
         _hallViewPool.Despawn(hallView);
+        var door = hallView.GetComponentInChildren<DoorView>();
     }
     
     public void DespawnAll()

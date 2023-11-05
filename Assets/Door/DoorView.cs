@@ -9,12 +9,10 @@ namespace Door
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            
         }
 
         public class Pool : MonoMemoryPool<DoorView>
         {
-            
         }
     }
 }
