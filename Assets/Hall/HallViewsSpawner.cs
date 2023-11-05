@@ -34,7 +34,7 @@ public class HallViewsSpawner: ITickable
         if (_spawnPeriod <= 0)
         {
             _hallController.Spawn();
-            _spawnPeriod = 7.2f;
+            _spawnPeriod = 12.2f;
         }
     }
 }
