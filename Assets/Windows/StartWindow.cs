@@ -1,11 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 public class StartWindow : MonoBehaviour
 {
-    public UIButton startButton;
+    public UIButton StartButton;
     public Canvas CanvasWindow;
+    public Transform StartWindowTransform;
     [Inject] private GameController _gameController;
     [Inject] private Camera _mainCamera;
 
@@ -15,14 +17,17 @@ public class StartWindow : MonoBehaviour
     
     private void StartGame()
     {
+        StartWindowTransform.DOMoveY(120, 0.7f).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+        });
         _gameController.StartGame();
-        transform.DOMoveY(2, 0.7f).OnComplete(() => { gameObject.SetActive(false); });
     }
 
     private void Start()
     {
         CanvasWindow.worldCamera = _mainCamera;
-        startButton.OnClickButton += StartGame;
+        StartButton.OnClickButton += StartGame;
     }
 }
 
