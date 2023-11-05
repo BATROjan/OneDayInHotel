@@ -3,14 +3,16 @@ using Zenject;
 
 namespace Player
 {
-    public class PlayerInstaller : MonoInstaller<PlayerInstaller>
+    public class PlayerInstaller : Installer<PlayerInstaller>
     {
         public override void InstallBindings()
         {
-            Container
+           Container.Bind<PlayerController>().AsSingle().NonLazy();
+           
+           Container
                 .BindMemoryPool<PlayerView, PlayerView.Pool>()
                 .FromComponentInNewPrefabResource("Player")
-                .AsSingle()
+                .AsCached()
                 .NonLazy();
         }
     }
