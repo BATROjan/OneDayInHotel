@@ -1,14 +1,18 @@
+using Door;
 using UnityEngine;
 
 public class GameController
 {
     private readonly HallController _hallController;
     private readonly HallViewsSpawner _hallViewsSpawner;
+    private readonly DoorController _doorController;
 
     public GameController(
         HallController hallController,
-        HallViewsSpawner hallViewsSpawner)
+        HallViewsSpawner hallViewsSpawner,
+        DoorController doorController)
     {
+        _doorController = doorController;
         _hallController = hallController;
         _hallViewsSpawner = hallViewsSpawner;
     }
@@ -27,6 +31,7 @@ public class GameController
         {
             _hallController.SpawnStartHall();
             _hallViewsSpawner.StartSpawn();
+            _doorController.Spawn();
         }
 
         private void Despawn()
