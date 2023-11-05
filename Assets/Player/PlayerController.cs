@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Player
 {
-    public class PlayerController :ITickable
+    public class PlayerController 
 
     { 
         private readonly PlayerView.Pool _playerPool;
@@ -17,23 +17,20 @@ namespace Player
 
         public void DoSomeThing()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_playerView.BelowTheDoor)
             {
                 Debug.Log("Open");
             }
-
-            Debug.Log("Close");
+            else
+            {
+               Debug.Log("Close"); 
+            }
         }
 
         public void Spawn()
         {
             _playerView = _playerPool.Spawn();
             _playerView.OnOpenDoor += DoSomeThing;
-        }
-
-        public void Tick()
-        {
-            DoSomeThing();
         }
     }
 }
