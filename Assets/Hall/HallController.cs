@@ -12,6 +12,8 @@ public class HallController
     private List<HallView> _hallsList = new List<HallView>();
     private readonly DoorView.Pool _doorPool;
 
+    private int ResetDoor;
+
     public HallController(
         DoorView.Pool doorPool,
         HallView.Pool hallViewPool,
@@ -31,10 +33,33 @@ public class HallController
         {
             _doorPool.Despawn(hall.transform.GetComponentInChildren<DoorView>());
         }
-        var door = _doorPool.Spawn();
-        door.transform.SetParent(hall.transform, worldPositionStays: false);
+        
+        var random = Random.Range(0, 1f);
+        if (random>0.5f)
+        {
+           SpawnDoor(hall);
+           if (ResetDoor>0)
+           {
+               ResetDoor--;
+           }
+        }
+        else
+        {
+            ResetDoor++;
+            if (ResetDoor>=3)
+            {
+                SpawnDoor(hall);
+                ResetDoor = 0;
+            }
+        }
         _hallsList.Add(hall);
         hall.AddAnimatin(() => Despawn(hall));
+    }
+
+    private void SpawnDoor(HallView hall)
+    {
+        var door = _doorPool.Spawn();
+        door.transform.SetParent(hall.transform, worldPositionStays: false);
     }
     
     public void SpawnStartHall()
