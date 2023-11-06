@@ -60,6 +60,9 @@ public class HallController
     {
         var door = _doorPool.Spawn();
         door.transform.SetParent(hall.transform, worldPositionStays: false);
+        var transformLocalPosition = door.transform.localPosition;
+        transformLocalPosition.y = 1.72f;
+        door.transform.localPosition = transformLocalPosition;
     }
     
     public void SpawnStartHall()
