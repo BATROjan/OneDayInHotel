@@ -1,8 +1,7 @@
 using DG.Tweening;
-using Door;
 using Player;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Zenject;
 
 public class StartWindow : MonoBehaviour
@@ -10,6 +9,7 @@ public class StartWindow : MonoBehaviour
     public UIButton StartButton;
     public Canvas CanvasWindow;
     public Transform StartWindowTransform;
+    public Text ScoreText;
     [Inject] private GameController _gameController;
     [Inject] private Camera _mainCamera;
     [Inject] private PlayerController _playerController;
@@ -20,17 +20,20 @@ public class StartWindow : MonoBehaviour
     
     private void StartGame()
     {
-        StartWindowTransform.DOMoveY(120, 1.4f).OnComplete(() =>
+        StartWindowTransform.DOLocalMoveY(1550f, 1f).OnComplete(() =>
         {
-            gameObject.SetActive(false);
+            Time.timeScale = 12;
+            CanvasWindow.gameObject.SetActive(false);
         });
-        _gameController.StartGame();
+        ScoreText.text = 0.ToString();
+        _gameController.StartGame(ScoreText);
     }
 
     public void EndGame()
     {
-        gameObject.SetActive(true);
-        StartWindowTransform.DOMoveY(0.5f, 1.4f);
+        Time.timeScale = 1;
+        CanvasWindow.gameObject.SetActive(true);
+        StartWindowTransform.DOLocalMoveY(1f, 0.5f);
         _gameController.StopGame();
     }
 
@@ -38,7 +41,6 @@ public class StartWindow : MonoBehaviour
     {
         CanvasWindow.worldCamera = _mainCamera;
         StartButton.OnClickButton += StartGame;
-        Time.timeScale = 12;
         _playerController.OnIsAlive += EndGame;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Player
@@ -7,6 +8,7 @@ namespace Player
     public class PlayerController
     {
         public Action OnIsAlive;
+        public PlayerView PlayerView => _playerView;
         
         private readonly PlayerView.Pool _playerPool;
         private PlayerView _playerView;
@@ -21,18 +23,17 @@ namespace Player
         {
             if (_playerView.BelowTheDoor )
             {
-                Debug.Log("Open");
+                
             }
             else
             {
                 OnIsAlive?.Invoke();
-               Debug.Log("Close"); 
             }
         }
 
-        public void Spawn()
+        public void Spawn(Text ScoreText)
         {
-            _playerView = _playerPool.Spawn();
+            _playerView = _playerPool.Spawn(ScoreText);
             _playerView.OnOpenDoor += DoSomeThing;
         }
         public void Despawn()

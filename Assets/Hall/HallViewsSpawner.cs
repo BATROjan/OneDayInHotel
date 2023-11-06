@@ -21,8 +21,8 @@ public class HallViewsSpawner: ITickable
 
     public void StopSpawn()
     {
-        _tickableManager.Remove(this);
         _hallController.DespawnAll();
+        _tickableManager.Remove(this);
     }
 
     public void Tick()

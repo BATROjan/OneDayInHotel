@@ -1,6 +1,7 @@
 using Door;
 using Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController
 {
@@ -19,9 +20,9 @@ public class GameController
         _hallViewsSpawner = hallViewsSpawner;
     }
     
-    public void StartGame()
+    public void StartGame(Text ScoreText)
     {
-        Spawn();
+        Spawn(ScoreText);
     }
 
     public void StopGame()
@@ -29,19 +30,16 @@ public class GameController
         Despawn();
     }
         
-    private void Spawn()
+    private void Spawn(Text ScoreText)
     {
         _hallController.SpawnStartHall();
         _hallViewsSpawner.StartSpawn();
-        _playerController.Spawn();
+        _playerController.Spawn(ScoreText);
     }
 
     private void Despawn()
     {
         _hallViewsSpawner.StopSpawn();
         _playerController.Despawn();
-       // _hallController.DespawnAll();
-        //_playerController.();
     }
-        
 }

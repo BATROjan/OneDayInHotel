@@ -30,7 +30,7 @@ namespace Door
         {
             if (IsOpen)
             {
-                var player = other.GetComponent<PlayerView>();
+                var player = _playerController.PlayerView;
                 player.OnOpenDoor += CloseDoor;
                 player.BelowTheDoor = true;
             }
@@ -43,7 +43,7 @@ namespace Door
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            var player = other.GetComponent<PlayerView>();
+            var player = _playerController.PlayerView;
             player.OnOpenDoor -= CloseDoor;
             player.BelowTheDoor = false;
         }
