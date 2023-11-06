@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Door;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,7 +13,7 @@ public class StartWindow : MonoBehaviour
     [Inject] private GameController _gameController;
     [Inject] private Camera _mainCamera;
     [Inject] private PlayerController _playerController;
-    
+
     public StartWindow()
     {
     }
@@ -26,7 +27,7 @@ public class StartWindow : MonoBehaviour
         _gameController.StartGame();
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         gameObject.SetActive(true);
         StartWindowTransform.DOMoveY(0.5f, 1.4f);

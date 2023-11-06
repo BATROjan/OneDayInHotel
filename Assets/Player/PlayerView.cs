@@ -8,8 +8,6 @@ public class PlayerView : MonoBehaviour, ITickable
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    public bool isAlive = true;
-
     public bool BelowTheDoor;
     private TickableManager _tickableManager;
 

@@ -1,4 +1,5 @@
 using System;
+using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -7,8 +8,10 @@ namespace Door
 {
     public class DoorView : MonoBehaviour
     {
+        [Inject] private PlayerController _playerController;
+        
         [SerializeField] private SpriteRenderer spriteRenderer;
-        [FormerlySerializedAs("isOpen")] public bool IsOpen;
+        public bool IsOpen;
 
         public void Reinit(Sprite sprite, bool isOpen)
         {
@@ -21,6 +24,7 @@ namespace Door
             {
                 var player = other.GetComponent<PlayerView>();
                 player.BelowTheDoor = true;
+                
             }
         }
 
@@ -28,9 +32,9 @@ namespace Door
         {
             var player = other.GetComponent<PlayerView>();
             player.BelowTheDoor = false;
-            if (IsOpen)
+            if (IsOpen )
             {
-                player.isAlive = false;
+                _playerController.OnIsAlive?.Invoke(); 
             }
         }
 
