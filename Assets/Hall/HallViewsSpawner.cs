@@ -6,7 +6,6 @@ public class HallViewsSpawner: ITickable
     private readonly TickableManager _tickableManager;
     private readonly HallController _hallController;
     private float _spawnPeriod= 3.25f;
-    private float _timer;
 
     public HallViewsSpawner(TickableManager tickableManager,
         HallController hallController)
@@ -29,7 +28,6 @@ public class HallViewsSpawner: ITickable
     public void Tick()
     {
         _spawnPeriod -= Time.deltaTime;
-        _timer += Time.deltaTime;
         
         if (_spawnPeriod <= 0)
         {

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -10,18 +11,26 @@ public class StartWindow : MonoBehaviour
     public Transform StartWindowTransform;
     [Inject] private GameController _gameController;
     [Inject] private Camera _mainCamera;
-
+    [Inject] private PlayerController _playerController;
+    
     public StartWindow()
     {
     }
     
     private void StartGame()
     {
-        StartWindowTransform.DOMoveY(120, 0.7f).OnComplete(() =>
+        StartWindowTransform.DOMoveY(120, 1.4f).OnComplete(() =>
         {
             gameObject.SetActive(false);
         });
         _gameController.StartGame();
+    }
+
+    private void EndGame()
+    {
+        gameObject.SetActive(true);
+        StartWindowTransform.DOMoveY(0.5f, 1.4f);
+        _gameController.StopGame();
     }
 
     private void Start()
@@ -29,6 +38,7 @@ public class StartWindow : MonoBehaviour
         CanvasWindow.worldCamera = _mainCamera;
         StartButton.OnClickButton += StartGame;
         Time.timeScale = 10;
+        _playerController.OnIsAlive += EndGame;
     }
 }
 

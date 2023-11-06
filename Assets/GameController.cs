@@ -38,7 +38,10 @@ public class GameController
 
     private void Despawn()
     {
-        _hallController.DespawnAll();
+        _hallViewsSpawner.StopSpawn();
+        _playerController.Despawn();
+       // _hallController.DespawnAll();
+        //_playerController.();
     }
         
 }

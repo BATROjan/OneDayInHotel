@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using Door;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -77,7 +78,8 @@ public class HallController
     
     public void Despawn(HallView hallView)
     {
-        _hallsList.Add(hallView);
+        hallView._hallAnimation.Kill();
+        _hallsList.Remove(hallView);
         _hallViewPool.Despawn(hallView);
         var door = hallView.GetComponentInChildren<DoorView>();
     }
@@ -86,7 +88,7 @@ public class HallController
     {
         foreach (var hallView in _hallsList)
         {
-            _hallViewPool.Despawn(hallView);
+            Despawn(hallView);
         }
     }
 }

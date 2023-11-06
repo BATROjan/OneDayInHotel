@@ -46,35 +46,3 @@ public class HallView : MonoBehaviour
         
     }
 }
-/*public class HallView : MonoBehaviour
-{
-    public Tween _hallAnimation;
-
-    private float allduraction = 20;
-    private float endPositionX = -17;
-    private float spawnPositionX = -17;
-    private float sumPath = 34;
-    public void AddAnimatin(TweenCallback despawn, float duraction)
-    {
-        _hallAnimation.Kill();
-        duraction = (spawnPositionX + transform.position.x)/(sumPath/duraction);
-        
-        _hallAnimation = transform
-            .DOMoveX(endPositionX,duraction)
-            .SetEase(Ease.Linear)
-            .OnComplete(despawn);
-    }
-
-    private void Reinit(Vector3 SpawnPosition)
-    {
-        transform.position = SpawnPosition;
-    }
-    public class Pool : MonoMemoryPool<Vector3, HallView>
-    {
-        protected override void Reinitialize(Vector3 SpawnPosition, HallView item)
-        {
-            item.Reinit(SpawnPosition);
-        }
-        
-    }
-}*/
