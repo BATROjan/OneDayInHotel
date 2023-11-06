@@ -96,9 +96,7 @@ public class HallController
     public void Despawn(HallView hallView)
     {
         hallView._hallAnimation.Kill();
-        _hallsList.Remove(hallView);
         _hallViewPool.Despawn(hallView);
-        var door = hallView.GetComponentInChildren<DoorView>();
     }
     
     public void DespawnAll()
@@ -107,6 +105,8 @@ public class HallController
         {
             Despawn(hallView);
         }
+
+        _hallsList.Clear();
     }
 
     public void AddToList(HallView hall)

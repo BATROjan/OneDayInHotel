@@ -1,6 +1,4 @@
-using Door;
 using Player;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController

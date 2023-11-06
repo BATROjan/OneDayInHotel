@@ -20,6 +20,7 @@ public class StartWindow : MonoBehaviour
     
     private void StartGame()
     {
+        Time.timeScale = 1;
         StartWindowTransform.DOLocalMoveY(1550f, 1f).OnComplete(() =>
         {
             Time.timeScale = 12;
@@ -31,9 +32,8 @@ public class StartWindow : MonoBehaviour
 
     public void EndGame()
     {
-        Time.timeScale = 1;
         CanvasWindow.gameObject.SetActive(true);
-        StartWindowTransform.DOLocalMoveY(1f, 0.5f);
+        StartWindowTransform.DOLocalMoveY(1f, 0.5f).OnComplete(()=>{Time.timeScale = 99;});
         _gameController.StopGame();
     }
 
