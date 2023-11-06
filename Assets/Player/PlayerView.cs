@@ -2,25 +2,32 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class PlayerView : MonoBehaviour
+public class PlayerView : MonoBehaviour, ITickable
 {
     public Action OnOpenDoor;
-    
+
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    
+
+    public bool isAlive = true;
+
     public bool BelowTheDoor;
-    
-       private void Update()
+    private TickableManager _tickableManager;
+
+    [Inject]
+    public void Construct(TickableManager tickableManager)
+    {
+        _tickableManager = tickableManager;
+        _tickableManager.Add(this);
+    }
+    public void Tick()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                OnOpenDoor?.Invoke();
-            }
+            OnOpenDoor?.Invoke();
         }
-    public class Pool  : MonoMemoryPool<PlayerView>
+    }
+    public class Pool : MonoMemoryPool<PlayerView>
     {
         
     }
-
- 
 }

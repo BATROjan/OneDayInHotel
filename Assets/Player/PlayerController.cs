@@ -19,7 +19,7 @@ namespace Player
 
         public void DoSomeThing()
         {
-            if (_playerView.BelowTheDoor)
+            if (_playerView.BelowTheDoor )
             {
                 Debug.Log("Open");
             }

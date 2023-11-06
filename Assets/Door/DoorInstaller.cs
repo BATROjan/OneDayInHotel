@@ -8,6 +8,7 @@ namespace Door
         {
             Container
                 .Bind<DoorConfig>()
+                .FromScriptableObjectResource("DoorConfig")
                 .AsSingle()
                 .NonLazy();
             

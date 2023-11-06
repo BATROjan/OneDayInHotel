@@ -4,6 +4,7 @@ using Door;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class HallController
 {
@@ -14,13 +15,16 @@ public class HallController
     private readonly DoorView.Pool _doorPool;
 
     private int ResetDoor;
+    private readonly DoorController _doorController;
 
     public HallController(
+        DoorController doorController,
         DoorView.Pool doorPool,
         HallView.Pool hallViewPool,
         HallConfig hallConfig
     )
     {
+        _doorController = doorController;
         _doorPool = doorPool;
         _hallViewPool = hallViewPool;
         _hallConfig = hallConfig;
@@ -38,11 +42,11 @@ public class HallController
         var random = Random.Range(0, 1f);
         if (random>0.5f)
         {
-           SpawnDoor(hall);
-           if (ResetDoor>0)
-           {
-               ResetDoor--;
-           }
+            SpawnDoor(hall);
+            if (ResetDoor>0)
+            {
+                ResetDoor--;
+            }
         }
         else
         {
@@ -53,26 +57,36 @@ public class HallController
                 ResetDoor = 0;
             }
         }
-        _hallsList.Add(hall);
+        AddToList(hall);
         hall.AddAnimatin(() => Despawn(hall));
     }
 
     private void SpawnDoor(HallView hall)
     {
-        var door = _doorPool.Spawn();
-        door.transform.SetParent(hall.transform, worldPositionStays: false);
+        var random = Random.Range(0, 2);
+        if (random ==0)
+        {
+            var door = _doorController.Spawn(random);
+            door.transform.SetParent(hall.transform, worldPositionStays: false);
+        }
+        else
+        {
+            var door = _doorController.Spawn(random);
+            door.transform.SetParent(hall.transform, worldPositionStays: false);
+        }
+        
     }
     
     public void SpawnStartHall()
     {
         var position = new Vector3(-4.2f, 0.5f, 0);
         var hall = _hallViewPool.Spawn(position);
-        _hallsList.Add(hall);
+        AddToList(hall);
         hall.AddAnimatin(() => Despawn(hall));
 
         position = new Vector3(8f, 0.5f, 0);
         var hall1 = _hallViewPool.Spawn(position);
-        _hallsList.Add(hall);
+        AddToList(hall);
         hall1.AddAnimatin(() => Despawn(hall1));
     }
     
@@ -89,6 +103,14 @@ public class HallController
         foreach (var hallView in _hallsList)
         {
             Despawn(hallView);
+        }
+    }
+
+    public void AddToList(HallView hall)
+    {
+        if (_hallsList.Contains(hall))
+        {
+            _hallsList.Add(hall);
         }
     }
 }

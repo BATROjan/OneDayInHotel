@@ -7,13 +7,16 @@ namespace Player
     {
         public override void InstallBindings()
         {
-           Container.Bind<PlayerController>().AsSingle().NonLazy();
-           
-           Container
-                .BindMemoryPool<PlayerView, PlayerView.Pool>()
-                .FromComponentInNewPrefabResource("Player")
-                .AsCached()
+            Container
+                .Bind<PlayerController>()
+                .AsSingle()
                 .NonLazy();
+
+            Container
+                .BindMemoryPool<PlayerView, PlayerView.Pool>()
+                .WithInitialSize(1)
+                .FromComponentInNewPrefabResource("Player")
+                .UnderTransformGroup("Player");
         }
     }
 }
