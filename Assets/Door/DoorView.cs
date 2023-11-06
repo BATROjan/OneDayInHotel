@@ -32,10 +32,6 @@ namespace Door
         {
             var player = other.GetComponent<PlayerView>();
             player.BelowTheDoor = false;
-            if (IsOpen )
-            {
-                _playerController.OnIsAlive?.Invoke(); 
-            }
         }
 
         public class Pool : MonoMemoryPool<Sprite, bool, DoorView>

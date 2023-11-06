@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using Door;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class HallController
 {
@@ -63,17 +60,21 @@ public class HallController
 
     private void SpawnDoor(HallView hall)
     {
-        var random = Random.Range(0, 2);
+        var random = Random.Range(0, 3);
+        DoorView door;
         if (random ==0)
         {
-            var door = _doorController.Spawn(random);
+            door = _doorController.Spawn(random);
             door.transform.SetParent(hall.transform, worldPositionStays: false);
         }
         else
         {
-            var door = _doorController.Spawn(random);
+            door = _doorController.Spawn(random);
             door.transform.SetParent(hall.transform, worldPositionStays: false);
         }
+        var transformLocalPosition = door.transform.localPosition;
+        transformLocalPosition.y = 1.72f;
+        door.transform.localPosition = transformLocalPosition;
         
     }
     

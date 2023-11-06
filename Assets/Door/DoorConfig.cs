@@ -37,7 +37,8 @@ namespace Door
     public enum Type
     {
        Open,
-       Close
+       Close,
+       Clock
     }
 
     [Serializable]
