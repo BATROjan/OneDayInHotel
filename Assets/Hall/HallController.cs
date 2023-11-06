@@ -51,6 +51,7 @@ public class HallController
             if (ResetDoor>=3)
             {
                 SpawnDoor(hall);
+                
                 ResetDoor = 0;
             }
         }
@@ -58,7 +59,7 @@ public class HallController
         hall.AddAnimatin(() => Despawn(hall));
     }
 
-    private void SpawnDoor(HallView hall)
+    private DoorView SpawnDoor(HallView hall)
     {
         var random = Random.Range(0, 3);
         DoorView door;
@@ -75,7 +76,8 @@ public class HallController
         var transformLocalPosition = door.transform.localPosition;
         transformLocalPosition.y = 1.72f;
         door.transform.localPosition = transformLocalPosition;
-        
+
+        return door;
     }
     
     public void SpawnStartHall()

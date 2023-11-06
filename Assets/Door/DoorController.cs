@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Door
 {
     public class DoorController
@@ -17,7 +15,7 @@ namespace Door
 
         public DoorView Spawn(int i)
         {
-            var door = _doorPool.Spawn(_doorConfig.GetTypeWithId(i).Sprite, _doorConfig.GetTypeWithId(i).IsOpen);
+            var door = _doorPool.Spawn(_doorConfig.GetTypeWithId(i));
             return door;
         }
     }

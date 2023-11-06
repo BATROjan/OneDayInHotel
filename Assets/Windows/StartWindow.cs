@@ -38,7 +38,7 @@ public class StartWindow : MonoBehaviour
     {
         CanvasWindow.worldCamera = _mainCamera;
         StartButton.OnClickButton += StartGame;
-        Time.timeScale = 10;
+        Time.timeScale = 12;
         _playerController.OnIsAlive += EndGame;
     }
 }
