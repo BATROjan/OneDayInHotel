@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using Door;
+using WallsItem;
 using UnityEngine;
 
 public class HallController
@@ -9,19 +9,19 @@ public class HallController
     private readonly HallConfig _hallConfig;
     
     private List<HallView> _hallsList = new List<HallView>();
-    private readonly DoorView.Pool _doorPool;
+    private readonly WallsItemView.Pool _doorPool;
 
     private int ResetDoor;
-    private readonly DoorController _doorController;
+    private readonly WallsItemController _wallsItemController;
 
     public HallController(
-        DoorController doorController,
-        DoorView.Pool doorPool,
+        WallsItemController wallsItemController,
+        WallsItemView.Pool doorPool,
         HallView.Pool hallViewPool,
         HallConfig hallConfig
     )
     {
-        _doorController = doorController;
+        _wallsItemController = wallsItemController;
         _doorPool = doorPool;
         _hallViewPool = hallViewPool;
         _hallConfig = hallConfig;
@@ -33,7 +33,7 @@ public class HallController
         var hall = _hallViewPool.Spawn(position);
         if (hall.transform.childCount>0)
         {
-            _doorPool.Despawn(hall.transform.GetComponentInChildren<DoorView>());
+            _doorPool.Despawn(hall.transform.GetComponentInChildren<WallsItemView>());
         }
         
         var random = Random.Range(0, 1f);
@@ -59,25 +59,25 @@ public class HallController
         hall.AddAnimatin(() => Despawn(hall));
     }
 
-    private DoorView SpawnDoor(HallView hall)
+    private WallsItemView SpawnDoor(HallView hall)
     {
         var random = Random.Range(0, 3);
-        DoorView door;
+        WallsItemView wallsItem;
         if (random ==0)
         {
-            door = _doorController.Spawn(random);
-            door.transform.SetParent(hall.transform, worldPositionStays: false);
+            wallsItem = _wallsItemController.Spawn(random);
+            wallsItem.transform.SetParent(hall.transform, worldPositionStays: false);
         }
         else
         {
-            door = _doorController.Spawn(random);
-            door.transform.SetParent(hall.transform, worldPositionStays: false);
+            wallsItem = _wallsItemController.Spawn(random);
+            wallsItem.transform.SetParent(hall.transform, worldPositionStays: false);
         }
-        var transformLocalPosition = door.transform.localPosition;
+        var transformLocalPosition = wallsItem.transform.localPosition;
         transformLocalPosition.y = 1.72f;
-        door.transform.localPosition = transformLocalPosition;
+        wallsItem.transform.localPosition = transformLocalPosition;
 
-        return door;
+        return wallsItem;
     }
     
     public void SpawnStartHall()

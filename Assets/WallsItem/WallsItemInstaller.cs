@@ -1,26 +1,26 @@
 using Zenject;
 
-namespace Door
+namespace WallsItem
 {
-    public class DoorInstaller : Installer<DoorInstaller>
+    public class WallsItemInstaller : Installer<WallsItemInstaller>
     {
         public override void InstallBindings()
         {
             Container
-                .Bind<DoorConfig>()
-                .FromScriptableObjectResource("DoorConfig")
+                .Bind<WallsItemConfig>()
+                .FromScriptableObjectResource("WallsItemConfig")
                 .AsSingle()
                 .NonLazy();
             
             Container
-                .Bind<DoorController>()
+                .Bind<WallsItemController>()
                 .AsSingle()
                 .NonLazy();
             
             Container
-                .BindMemoryPool<DoorView, DoorView.Pool>()
+                .BindMemoryPool<WallsItemView, WallsItemView.Pool>()
                 .WithInitialSize(5)
-                .FromComponentInNewPrefabResource("Door")
+                .FromComponentInNewPrefabResource("Item")
                 .UnderTransformGroup("Hall");
         }
     }

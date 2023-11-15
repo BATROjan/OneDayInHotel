@@ -2,28 +2,21 @@ using Player;
 using UnityEngine;
 using Zenject;
 
-namespace Door
+namespace WallsItem
 {
-    public class DoorView : MonoBehaviour
+    public class WallsItemView : MonoBehaviour
     {
         [Inject] private PlayerController _playerController;
-        [Inject] private DoorConfig _doorConfig;
+        [Inject] private WallsItemConfig _wallsItemConfig;
         
         [SerializeField] private SpriteRenderer spriteRenderer;
-        private DoorModel _doorModel;
+        private WallsItemModel _wallsItemModel;
         public bool IsOpen;
 
-        public void Reinit(DoorModel doorModel)
+        public void Reinit(WallsItemModel wallsItemModel)
         {
-            _doorModel = doorModel;
-            spriteRenderer.sprite = _doorModel.Sprite;
-            IsOpen = _doorModel.Sprite;
-        }
-
-        private void CloseDoor()
-        {
-            spriteRenderer.sprite = _doorConfig.GetTypeWithId(1).Sprite;
-            IsOpen = _doorConfig.GetTypeWithId(1).Sprite;
+            _wallsItemModel = wallsItemModel;
+            spriteRenderer.sprite = _wallsItemModel.Sprite;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -31,7 +24,6 @@ namespace Door
             if (IsOpen)
             {
                 var player = _playerController.PlayerView;
-                player.OnOpenDoor += CloseDoor;
                 player.BelowTheDoor = true;
             }
 
@@ -44,15 +36,14 @@ namespace Door
         private void OnTriggerExit2D(Collider2D other)
         {
             var player = _playerController.PlayerView;
-            player.OnOpenDoor -= CloseDoor;
             player.BelowTheDoor = false;
         }
 
-        public class Pool : MonoMemoryPool<DoorModel, DoorView>
+        public class Pool : MonoMemoryPool<WallsItemModel, WallsItemView>
         {
-            protected override void Reinitialize(DoorModel doorModel, DoorView item)
+            protected override void Reinitialize(WallsItemModel wallsItemModel, WallsItemView item)
             {
-                item.Reinit(doorModel);
+                item.Reinit(wallsItemModel);
             }
         }
     }

@@ -1,4 +1,4 @@
-using Door;
+using WallsItem;
 using Player;
 using UnityEngine;
 using Zenject;
@@ -16,7 +16,7 @@ public class ApplicationInstaller : MonoInstaller
         
         HallInstaller.Install(Container);
         
-        DoorInstaller.Install(Container);
+        WallsItemInstaller.Install(Container);
         
         PlayerInstaller.Install(Container);
         
