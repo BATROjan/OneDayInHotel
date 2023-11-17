@@ -17,27 +17,28 @@ public class GameController
         _hallController = hallController;
         _hallViewsSpawner = hallViewsSpawner;
     }
-    
-    public void StartGame(Text ScoreText)
-    {
-        Spawn(ScoreText);
-    }
 
+    public void StartGame()
+    {
+        Spawn();
+    }
     public void StopGame()
     {
         Despawn();
     }
         
-    private void Spawn(Text ScoreText)
+    private void Spawn( )
     {
         _hallController.SpawnStartHall();
         _hallViewsSpawner.StartSpawn();
-        _playerController.Spawn(ScoreText);
+        _playerController.Spawn();
+        _playerController.IsDead += StopGame;
     }
 
     private void Despawn()
     {
         _hallViewsSpawner.StopSpawn();
         _playerController.Despawn();
+        _playerController.IsDead -= StopGame;
     }
 }

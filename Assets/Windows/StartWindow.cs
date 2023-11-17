@@ -26,8 +26,7 @@ public class StartWindow : MonoBehaviour
             Time.timeScale = 12;
             CanvasWindow.gameObject.SetActive(false);
         });
-        ScoreText.text = 0.ToString();
-        _gameController.StartGame(ScoreText);
+        _gameController.StartGame();
     }
 
     public void EndGame()
@@ -41,7 +40,6 @@ public class StartWindow : MonoBehaviour
     {
         CanvasWindow.worldCamera = _mainCamera;
         StartButton.OnClickButton += StartGame;
-        _playerController.OnIsAlive += EndGame;
     }
 }
 

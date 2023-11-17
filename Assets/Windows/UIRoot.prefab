@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8743846507838586815}
   - component: {fileID: 7034932345073697143}
+  - component: {fileID: 1102918809635370378}
   - component: {fileID: 5617296566599865521}
   m_Layer: 5
   m_Name: Text (Legacy)
@@ -165,6 +166,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2996247257103179223}
   m_CullTransparentMesh: 1
+--- !u!114 &1102918809635370378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996247257103179223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83d9e174d49498ba2bafbb5c3761a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 5617296566599865521}
 --- !u!114 &5617296566599865521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +212,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 
 --- !u!1001 &8991106442869641019
 PrefabInstance:
   m_ObjectHideFlags: 0

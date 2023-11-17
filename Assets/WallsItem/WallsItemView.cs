@@ -6,11 +6,14 @@ namespace WallsItem
 {
     public class WallsItemView : MonoBehaviour
     {
+        public SpriteRenderer SpriteRenderer => spriteRenderer;
+        
         [Inject] private PlayerController _playerController;
-        [Inject] private WallsItemConfig _wallsItemConfig;
         
         [SerializeField] private SpriteRenderer spriteRenderer;
+        
         private WallsItemModel _wallsItemModel;
+        
         public bool IsOpen;
 
         public void Reinit(WallsItemModel wallsItemModel)
