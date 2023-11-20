@@ -9,6 +9,7 @@ namespace Player
     public class PlayerController : ITickable
     {
         public Action IsDead;
+        public Action OnTakeTowel;
         public PlayerView PlayerView => _playerView;
 
         private readonly PlayerView.Pool _playerPool;
@@ -42,6 +43,7 @@ namespace Player
             if (_playerView.BelowTheDoor)
             {
                 _wallsItemController.CloseTheDoor();
+                OnTakeTowel?.Invoke();
             }
             else
             {

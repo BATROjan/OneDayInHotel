@@ -9,13 +9,14 @@ public class StartWindow : MonoBehaviour
     public UIButton StartButton;
     public Canvas CanvasWindow;
     public Transform StartWindowTransform;
-    public Text ScoreText;
     [Inject] private GameController _gameController;
     [Inject] private Camera _mainCamera;
     [Inject] private PlayerController _playerController;
 
-    public StartWindow()
+    public StartWindow(PlayerController playerController)
     {
+        _playerController = playerController;
+        _playerController.IsDead += EndGame;
     }
     
     private void StartGame()

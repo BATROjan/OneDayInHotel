@@ -1,5 +1,6 @@
 using WallsItem;
 using Player;
+using Score;
 using UnityEngine;
 using Zenject;
 
@@ -19,6 +20,8 @@ public class ApplicationInstaller : MonoInstaller
         WallsItemInstaller.Install(Container);
         
         PlayerInstaller.Install(Container);
+        
+        ScoreInstaller.Install(Container);
         
         Container
             .Bind<GameController>()
