@@ -1,18 +1,22 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using WallsItem;
-using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HallController
 {
     private readonly HallView.Pool _hallViewPool;
     private readonly HallConfig _hallConfig;
     
-    private List<HallView> _hallsList = new List<HallView>();
+    public List<HallView> _hallsList = new List<HallView>();
     private readonly WallsItemView.Pool _doorPool;
+    private readonly WallsItemController _wallsItemController;
 
     private int ResetDoor;
-    private readonly WallsItemController _wallsItemController;
+    private bool FirstSpawned=true;
+    private float speedAnimation;
+    
 
     public HallController(
         WallsItemController wallsItemController,
@@ -25,12 +29,36 @@ public class HallController
         _doorPool = doorPool;
         _hallViewPool = hallViewPool;
         _hallConfig = hallConfig;
+        
+        speedAnimation = _hallConfig.sumPath / _hallConfig.allDuraction;
+        FirstSpawn();
+        //Spawn();
+    }
+
+    public void NewSpawn()
+    {
+    }
+
+    public void FirstSpawn()
+    {
+        if (FirstSpawned)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                var position = _hallConfig.GetSpawnPoint(i);
+                var hall = _hallViewPool.Spawn(position);
+                AddAnimatin(() => Despawn(hall),hall);
+                AddToList(hall);
+            }
+            FirstSpawned = false;
+        }
     }
 
     public void Spawn()
     {
-        var position = new Vector3(17, 0.5f, 0);
+        var position = _hallConfig.GetSpawnPoint(4);
         var hall = _hallViewPool.Spawn(position);
+        AddAnimatin(() => Despawn(hall),hall);
         if (hall.transform.childCount>0)
         {
             _doorPool.Despawn(hall.transform.GetComponentInChildren<WallsItemView>());
@@ -56,7 +84,7 @@ public class HallController
             }
         }
         AddToList(hall);
-        hall.AddAnimatin(() => Despawn(hall));
+       // hall.AddAnimatin(() => Despawn(hall));
     }
 
     private WallsItemView SpawnDoor(HallView hall)
@@ -80,23 +108,12 @@ public class HallController
         return wallsItem;
     }
     
-    public void SpawnStartHall()
-    {
-        var position = new Vector3(-4.2f, 0.5f, 0);
-        var hall = _hallViewPool.Spawn(position);
-        AddToList(hall);
-        hall.AddAnimatin(() => Despawn(hall));
-
-        position = new Vector3(8f, 0.5f, 0);
-        var hall1 = _hallViewPool.Spawn(position);
-        AddToList(hall);
-        hall1.AddAnimatin(() => Despawn(hall1));
-    }
-    
     public void Despawn(HallView hallView)
     {
-        hallView._hallAnimation.Kill();
+        //hallView._hallAnimation.Kill();
+        _hallsList.Remove(hallView);
         _hallViewPool.Despawn(hallView);
+        Spawn();
     }
     
     public void DespawnAll()
@@ -111,9 +128,21 @@ public class HallController
 
     public void AddToList(HallView hall)
     {
-        if (_hallsList.Contains(hall))
+        if (!_hallsList.Contains(hall))
         {
             _hallsList.Add(hall);
         }
+    }
+    
+    public void AddAnimatin(TweenCallback despawn, HallView hallView)
+    {
+        hallView._hallAnimation.Kill();
+        
+        var duraction = (Math.Abs(_hallConfig.endPositionX) + hallView.transform.position.x)/(speedAnimation);
+        
+        hallView._hallAnimation = hallView.transform
+            .DOMoveX(_hallConfig.endPositionX,duraction)
+            .SetEase(Ease.Linear)
+            .OnComplete(despawn);
     }
 }

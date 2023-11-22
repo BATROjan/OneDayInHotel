@@ -29,11 +29,6 @@ namespace WallsItem
                 var player = _playerController.PlayerView;
                 player.BelowTheDoor = true;
             }
-
-            if (Time.timeScale < 25)
-            {
-                Time.timeScale += 0.25f;
-            }
         }
 
         private void OnTriggerExit2D(Collider2D other)

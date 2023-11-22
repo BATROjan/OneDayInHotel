@@ -27,12 +27,9 @@ public class HallViewsSpawner: ITickable
 
     public void Tick()
     {
-        _spawnPeriod -= Time.deltaTime;
-        
-        if (_spawnPeriod <= 0)
+        if (_hallController._hallsList.Count < 5)
         {
-            _hallController.Spawn();
-            _spawnPeriod = 12f;
+            //_hallController.Spawn();
         }
     }
 }

@@ -17,17 +17,15 @@ public class StartWindow : MonoBehaviour
     {
         _playerController = playerController;
         _playerController.IsDead += EndGame;
+        
     }
     
     private void StartGame()
-    {
-        Time.timeScale = 1;
+    {        
         StartWindowTransform.DOLocalMoveY(1550f, 1f).OnComplete(() =>
         {
-            Time.timeScale = 12;
             CanvasWindow.gameObject.SetActive(false);
         });
-        _gameController.StartGame();
     }
 
     public void EndGame()
@@ -38,7 +36,8 @@ public class StartWindow : MonoBehaviour
     }
 
     private void Start()
-    {
+    {Time.timeScale = 5;
+        _gameController.StartGame();
         CanvasWindow.worldCamera = _mainCamera;
         StartButton.OnClickButton += StartGame;
     }

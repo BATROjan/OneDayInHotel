@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b775e6c484b847b1266539ad8a1b9, type: 3}
   m_Name: HallConfig
   m_EditorClassIdentifier: 
-  speedAnimation: 0
-  parentsForHallsObject: {fileID: 0}
+  allDuraction: 20
+  endPositionX: -17
+  spawnPositionX: 17
+  sumPath: 34
+  SpawnPoint:
+  - {x: 0, y: 0.5, z: 0}
+  - {x: 10, y: 0.5, z: 0}
+  - {x: 20, y: 0.5, z: 0}
+  - {x: 30, y: 0.5, z: 0}
+  - {x: 40, y: 0.5, z: 0}

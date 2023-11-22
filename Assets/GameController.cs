@@ -29,7 +29,7 @@ public class GameController
         
     private void Spawn( )
     {
-        _hallController.SpawnStartHall();
+        _hallController.FirstSpawn();
         _hallViewsSpawner.StartSpawn();
         _playerController.Spawn();
         _playerController.IsDead += StopGame;

@@ -28,16 +28,16 @@ RectTransform:
   m_GameObject: {fileID: 8640136808241135461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.0239999, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.085, y: -0.093}
-  m_SizeDelta: {x: 10.142, y: 11.845}
+  m_AnchoredPosition: {x: -0.10089111, y: 0}
+  m_SizeDelta: {x: 10, y: 11.780029}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6913744606954706138
 CanvasRenderer:
@@ -104,8 +104,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 10.24, y: 11.78}
+  m_DrawMode: 2
+  m_Size: {x: 10, y: 11.78}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
