@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class HallController
 {
+    public bool GameStarted;
+    
     private readonly HallView.Pool _hallViewPool;
     private readonly HallConfig _hallConfig;
     
@@ -32,11 +34,6 @@ public class HallController
         
         speedAnimation = _hallConfig.sumPath / _hallConfig.allDuraction;
         FirstSpawn();
-        //Spawn();
-    }
-
-    public void NewSpawn()
-    {
     }
 
     public void FirstSpawn()
@@ -63,12 +60,21 @@ public class HallController
         {
             _doorPool.Despawn(hall.transform.GetComponentInChildren<WallsItemView>());
         }
-        
+        if (GameStarted)
+        {
+            SpawnWallsItems(hall);    
+        }
+
+        AddToList(hall);
+    }
+
+    private void SpawnWallsItems(HallView hall)
+    {
         var random = Random.Range(0, 1f);
-        if (random>0.5f)
+        if (random > 0.5f)
         {
             SpawnDoor(hall);
-            if (ResetDoor>0)
+            if (ResetDoor > 0)
             {
                 ResetDoor--;
             }
@@ -76,15 +82,13 @@ public class HallController
         else
         {
             ResetDoor++;
-            if (ResetDoor>=3)
+            if (ResetDoor >= 3)
             {
                 SpawnDoor(hall);
-                
+
                 ResetDoor = 0;
             }
         }
-        AddToList(hall);
-       // hall.AddAnimatin(() => Despawn(hall));
     }
 
     private WallsItemView SpawnDoor(HallView hall)
@@ -110,7 +114,6 @@ public class HallController
     
     public void Despawn(HallView hallView)
     {
-        //hallView._hallAnimation.Kill();
         _hallsList.Remove(hallView);
         _hallViewPool.Despawn(hallView);
         Spawn();

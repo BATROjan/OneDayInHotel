@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb7b775e6c484b847b1266539ad8a1b9, type: 3}
-  m_Name: HallConfig
+  m_Script: {fileID: 11500000, guid: 89b38dc0a68f446e910ac6a72948e34d, type: 3}
+  m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  allDuraction: 5
-  endPositionX: -15
-  sumPath: 3
-  SpawnPoint:
-  - {x: -5, y: 0.5, z: 0}
-  - {x: 5, y: 0.5, z: 0}
-  - {x: 15, y: 0.5, z: 0}
-  - {x: 25, y: 0.5, z: 0}
-  - {x: 35, y: 0.5, z: 0}
+  SpriteRenderer: {fileID: 4777561218186982230, guid: da8a04704af591646a865b7c1f61f434, type: 3}
+  SpawnPoint: {x: -15, y: 0, z: 0}
+  PlayingPoint: {x: -6, y: 0, z: 0}

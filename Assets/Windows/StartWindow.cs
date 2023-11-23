@@ -17,7 +17,6 @@ public class StartWindow : MonoBehaviour
     {
         _playerController = playerController;
         _playerController.IsDead += EndGame;
-        
     }
     
     private void StartGame()
@@ -26,6 +25,7 @@ public class StartWindow : MonoBehaviour
         {
             CanvasWindow.gameObject.SetActive(false);
         });
+        _gameController.StartGame();
     }
 
     public void EndGame()
@@ -36,8 +36,7 @@ public class StartWindow : MonoBehaviour
     }
 
     private void Start()
-    {Time.timeScale = 5;
-        _gameController.StartGame();
+    {
         CanvasWindow.worldCamera = _mainCamera;
         StartButton.OnClickButton += StartGame;
     }

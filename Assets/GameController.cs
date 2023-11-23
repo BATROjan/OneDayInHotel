@@ -1,4 +1,5 @@
 using Player;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController
@@ -29,16 +30,15 @@ public class GameController
         
     private void Spawn( )
     {
-        _hallController.FirstSpawn();
-        _hallViewsSpawner.StartSpawn();
+        Time.timeScale = 5;
         _playerController.Spawn();
-        _playerController.IsDead += StopGame;
+        _hallController.GameStarted = true;
     }
 
     private void Despawn()
     {
         _hallViewsSpawner.StopSpawn();
         _playerController.Despawn();
-        _playerController.IsDead -= StopGame;
+        _hallController.GameStarted = false;
     }
 }

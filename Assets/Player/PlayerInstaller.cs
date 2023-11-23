@@ -8,6 +8,11 @@ namespace Player
         public override void InstallBindings()
         {
             Container
+                .Bind<PlayerConfig>()
+                .FromScriptableObjectResource("PlayerConfig")
+                .AsSingle()
+                .NonLazy();
+            Container
                 .Bind<PlayerController>()
                 .AsSingle()
                 .NonLazy();

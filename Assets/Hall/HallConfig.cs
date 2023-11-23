@@ -5,7 +5,6 @@ public class HallConfig : ScriptableObject
 {
     public float allDuraction;
     public float endPositionX;
-    public float spawnPositionX;
     public float sumPath;
     [SerializeField] private Vector3[] SpawnPoint;
 
