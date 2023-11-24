@@ -16,7 +16,6 @@ public class StartWindow : MonoBehaviour
     public StartWindow(PlayerController playerController)
     {
         _playerController = playerController;
-        _playerController.IsDead += EndGame;
     }
     
     private void StartGame()
@@ -26,19 +25,20 @@ public class StartWindow : MonoBehaviour
             CanvasWindow.gameObject.SetActive(false);
         });
         _gameController.StartGame();
+
     }
 
     public void EndGame()
     {
         CanvasWindow.gameObject.SetActive(true);
-        StartWindowTransform.DOLocalMoveY(1f, 0.5f).OnComplete(()=>{Time.timeScale = 99;});
-        _gameController.StopGame();
+        StartWindowTransform.DOLocalMoveY(1f, 0.5f).OnComplete(()=>{Time.timeScale = 1;});
     }
 
     private void Start()
     {
         CanvasWindow.worldCamera = _mainCamera;
         StartButton.OnClickButton += StartGame;
+        _playerController.IsDead += EndGame;
     }
 }
 

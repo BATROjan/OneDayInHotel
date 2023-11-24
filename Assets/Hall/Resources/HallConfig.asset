@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7b775e6c484b847b1266539ad8a1b9, type: 3}
   m_Name: HallConfig
   m_EditorClassIdentifier: 
-  allDuraction: 5
+  allDuraction: 2
   endPositionX: -15
-  sumPath: 3
+  sumPath: 5
   SpawnPoint:
   - {x: -5, y: 0.5, z: 0}
   - {x: 5, y: 0.5, z: 0}

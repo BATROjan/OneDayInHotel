@@ -16,15 +16,19 @@ namespace Player
         private readonly WallsItemController _wallsItemController;
         private readonly PlayerView.Pool _playerPool;
         private readonly PlayerConfig _playerConfig;
+        private readonly HallController _hallController;
 
+        private PlayerView _playerView;
         private TickableManager _tickableManager;
-
+        
         public PlayerController(
+            HallController hallController,
             WallsItemController wallsItemController,
             PlayerConfig playerConfig,
             PlayerView.Pool playerPool,
             TickableManager tickableManager)
         {
+            _hallController = hallController;
             _playerConfig = playerConfig;
             _playerPool = playerPool;
             _wallsItemController = wallsItemController;
@@ -32,8 +36,6 @@ namespace Player
             _tickableManager = tickableManager;
 
         }
-
-        private PlayerView _playerView;
 
         public void Tick()
         {
@@ -47,14 +49,12 @@ namespace Player
         {
             if (_playerView.BelowTheDoor)
             {
-                _wallsItemController.CloseTheDoor();
+                //_wallsItemController.CloseTheDoor(_hallController._hallsList[1]);
                 OnTakeTowel?.Invoke();
-                Debug.Log(0);
             }
             else
             {
                 IsDead?.Invoke();
-                Debug.Log(1);
             }
         }
 

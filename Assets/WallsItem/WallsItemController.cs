@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace WallsItem
 {
     public class WallsItemController
@@ -6,6 +8,7 @@ namespace WallsItem
         private readonly WallsItemConfig _wallsItemConfig;
 
         private WallsItemView _wallsItemView;
+        private Dictionary<HallView, WallsItemView> _wallsItemViews = new();
 
         public WallsItemController( 
             WallsItemView.Pool doorPool,
@@ -15,20 +18,24 @@ namespace WallsItem
             _doorPool = doorPool;
         }
 
-        public WallsItemView Spawn(int i)
+        public WallsItemView Spawn(int i, HallView hall)
         {
             var door = _doorPool.Spawn(_wallsItemConfig.GetTypeWithId(i));
+            _wallsItemViews.Add(hall, door);
             door.IsOpen = _wallsItemConfig.GetTypeWithId(i).IsOpen;
             _wallsItemView = door;
             return door;
         }
 
-        public void CloseTheDoor()
+        public void CloseTheDoor(HallView hall)
         {
             if (_wallsItemView.IsOpen)
             {
-                _wallsItemView.SpriteRenderer.sprite = _wallsItemConfig.GetTypeWithId(1).Sprite;
-                _wallsItemView.IsOpen = false;
+                _wallsItemViews[hall].SpriteRenderer.sprite = _wallsItemConfig.GetTypeWithId(1).Sprite;
+                _wallsItemViews[hall].IsOpen = false;
+
+                // _wallsItemView.SpriteRenderer.sprite = _wallsItemConfig.GetTypeWithId(1).Sprite;
+                //_wallsItemView.IsOpen = false;
             }
         }
     }

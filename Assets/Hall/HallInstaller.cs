@@ -15,11 +15,6 @@ public class HallInstaller : Installer<HallInstaller>
             .WithInitialSize(6)
             .FromComponentInNewPrefabResource("HallView")
             .UnderTransformGroup("Hall");
-        
-        Container
-            .Bind<HallViewsSpawner>()
-            .AsSingle()
-            .NonLazy();
 
         Container
             .Bind<HallController>()

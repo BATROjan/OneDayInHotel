@@ -7,11 +7,11 @@ using Random = UnityEngine.Random;
 public class HallController
 {
     public bool GameStarted;
-    
+    public List<HallView> _hallsList = new List<HallView>();
+
     private readonly HallView.Pool _hallViewPool;
     private readonly HallConfig _hallConfig;
-    
-    public List<HallView> _hallsList = new List<HallView>();
+
     private readonly WallsItemView.Pool _doorPool;
     private readonly WallsItemController _wallsItemController;
 
@@ -64,7 +64,6 @@ public class HallController
         {
             SpawnWallsItems(hall);    
         }
-
         AddToList(hall);
     }
 
@@ -97,12 +96,12 @@ public class HallController
         WallsItemView wallsItem;
         if (random ==0)
         {
-            wallsItem = _wallsItemController.Spawn(random);
+            wallsItem = _wallsItemController.Spawn(random, hall);
             wallsItem.transform.SetParent(hall.transform, worldPositionStays: false);
         }
         else
         {
-            wallsItem = _wallsItemController.Spawn(random);
+            wallsItem = _wallsItemController.Spawn(random, hall);
             wallsItem.transform.SetParent(hall.transform, worldPositionStays: false);
         }
         var transformLocalPosition = wallsItem.transform.localPosition;
